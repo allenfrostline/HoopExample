@@ -12,7 +12,11 @@
 		DDF997942B92F555008B3BFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF997932B92F555008B3BFA /* ContentView.swift */; };
 		DDF997962B92F555008B3BFA /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF997952B92F555008B3BFA /* ImmersiveView.swift */; };
 		DDF997982B92F556008B3BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDF997972B92F556008B3BFA /* Assets.xcassets */; };
-		DDF9979B2B92F556008B3BFA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDF9979A2B92F556008B3BFA /* Preview Assets.xcassets */; };
+		DDF997A52B92F62F008B3BFA /* HoopEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF997A42B92F62F008B3BFA /* HoopEntity.swift */; };
+		DDF997A82B92F6AF008B3BFA /* RealityGeometries in Frameworks */ = {isa = PBXBuildFile; productRef = DDF997A72B92F6AF008B3BFA /* RealityGeometries */; };
+		DDF997AA2B92F842008B3BFA /* ImmersiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF997A92B92F842008B3BFA /* ImmersiveModel.swift */; };
+		DDF997AC2B92FCEC008B3BFA /* ball.usdz in Resources */ = {isa = PBXBuildFile; fileRef = DDF997AB2B92FCEC008B3BFA /* ball.usdz */; };
+		DDF997AF2B930081008B3BFA /* HandTrackingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF997AE2B930081008B3BFA /* HandTrackingModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +26,11 @@
 		DDF997932B92F555008B3BFA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DDF997952B92F555008B3BFA /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
 		DDF997972B92F556008B3BFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DDF9979A2B92F556008B3BFA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DDF9979C2B92F556008B3BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDF997A42B92F62F008B3BFA /* HoopEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoopEntity.swift; sourceTree = "<group>"; };
+		DDF997A92B92F842008B3BFA /* ImmersiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveModel.swift; sourceTree = "<group>"; };
+		DDF997AB2B92FCEC008B3BFA /* ball.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = ball.usdz; sourceTree = "<group>"; };
+		DDF997AE2B930081008B3BFA /* HandTrackingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandTrackingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +39,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDF997902B92F555008B3BFA /* RealityKitContent in Frameworks */,
+				DDF997A82B92F6AF008B3BFA /* RealityGeometries in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,11 +67,12 @@
 			isa = PBXGroup;
 			children = (
 				DDF997912B92F555008B3BFA /* HoopExampleApp.swift */,
-				DDF997932B92F555008B3BFA /* ContentView.swift */,
-				DDF997952B92F555008B3BFA /* ImmersiveView.swift */,
+				DDF997B12B9300A3008B3BFA /* Views */,
+				DDF997B02B930097008B3BFA /* Entities */,
+				DDF997B32B9300E7008B3BFA /* Resources */,
+				DDF997AD2B930070008B3BFA /* Models */,
 				DDF997972B92F556008B3BFA /* Assets.xcassets */,
 				DDF9979C2B92F556008B3BFA /* Info.plist */,
-				DDF997992B92F556008B3BFA /* Preview Content */,
 			);
 			path = HoopExample;
 			sourceTree = "<group>";
@@ -76,12 +85,38 @@
 			path = Packages;
 			sourceTree = "<group>";
 		};
-		DDF997992B92F556008B3BFA /* Preview Content */ = {
+		DDF997AD2B930070008B3BFA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DDF9979A2B92F556008B3BFA /* Preview Assets.xcassets */,
+				DDF997A92B92F842008B3BFA /* ImmersiveModel.swift */,
+				DDF997AE2B930081008B3BFA /* HandTrackingModel.swift */,
 			);
-			path = "Preview Content";
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DDF997B02B930097008B3BFA /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				DDF997A42B92F62F008B3BFA /* HoopEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		DDF997B12B9300A3008B3BFA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDF997932B92F555008B3BFA /* ContentView.swift */,
+				DDF997952B92F555008B3BFA /* ImmersiveView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DDF997B32B9300E7008B3BFA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DDF997AB2B92FCEC008B3BFA /* ball.usdz */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,6 +137,7 @@
 			name = HoopExample;
 			packageProductDependencies = (
 				DDF9978F2B92F555008B3BFA /* RealityKitContent */,
+				DDF997A72B92F6AF008B3BFA /* RealityGeometries */,
 			);
 			productName = HoopExample;
 			productReference = DDF9978A2B92F555008B3BFA /* HoopExample.app */;
@@ -131,6 +167,9 @@
 				Base,
 			);
 			mainGroup = DDF997812B92F555008B3BFA;
+			packageReferences = (
+				DDF997A62B92F6AF008B3BFA /* XCRemoteSwiftPackageReference "RealityGeometries" */,
+			);
 			productRefGroup = DDF9978B2B92F555008B3BFA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -145,7 +184,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDF9979B2B92F556008B3BFA /* Preview Assets.xcassets in Resources */,
+				DDF997AC2B92FCEC008B3BFA /* ball.usdz in Resources */,
 				DDF997982B92F556008B3BFA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +198,9 @@
 			files = (
 				DDF997942B92F555008B3BFA /* ContentView.swift in Sources */,
 				DDF997922B92F555008B3BFA /* HoopExampleApp.swift in Sources */,
+				DDF997A52B92F62F008B3BFA /* HoopEntity.swift in Sources */,
+				DDF997AF2B930081008B3BFA /* HandTrackingModel.swift in Sources */,
+				DDF997AA2B92F842008B3BFA /* ImmersiveModel.swift in Sources */,
 				DDF997962B92F555008B3BFA /* ImmersiveView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +334,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"HoopExample/Preview Content\"";
 				DEVELOPMENT_TEAM = 74RDGD47YG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -318,7 +359,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"HoopExample/Preview Content\"";
 				DEVELOPMENT_TEAM = 74RDGD47YG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -360,10 +400,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		DDF997A62B92F6AF008B3BFA /* XCRemoteSwiftPackageReference "RealityGeometries" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/RealityGeometries";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		DDF9978F2B92F555008B3BFA /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;
+		};
+		DDF997A72B92F6AF008B3BFA /* RealityGeometries */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDF997A62B92F6AF008B3BFA /* XCRemoteSwiftPackageReference "RealityGeometries" */;
+			productName = RealityGeometries;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
