@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD2612DF2B95891D007CF041 /* BallEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2612DE2B95891D007CF041 /* BallEntity.swift */; };
 		DDF997902B92F555008B3BFA /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = DDF9978F2B92F555008B3BFA /* RealityKitContent */; };
 		DDF997922B92F555008B3BFA /* HoopExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF997912B92F555008B3BFA /* HoopExampleApp.swift */; };
 		DDF997942B92F555008B3BFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF997932B92F555008B3BFA /* ContentView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD2612DE2B95891D007CF041 /* BallEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallEntity.swift; sourceTree = "<group>"; };
 		DDF9978A2B92F555008B3BFA /* HoopExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoopExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDF9978E2B92F555008B3BFA /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		DDF997912B92F555008B3BFA /* HoopExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoopExampleApp.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				DDF997A42B92F62F008B3BFA /* HoopEntity.swift */,
+				DD2612DE2B95891D007CF041 /* BallEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				DDF997922B92F555008B3BFA /* HoopExampleApp.swift in Sources */,
 				DDF997A52B92F62F008B3BFA /* HoopEntity.swift in Sources */,
 				DDF997AF2B930081008B3BFA /* HandTrackingModel.swift in Sources */,
+				DD2612DF2B95891D007CF041 /* BallEntity.swift in Sources */,
 				DDF997AA2B92F842008B3BFA /* ImmersiveModel.swift in Sources */,
 				DDF997962B92F555008B3BFA /* ImmersiveView.swift in Sources */,
 			);

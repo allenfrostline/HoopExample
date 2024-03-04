@@ -34,8 +34,9 @@ extension UIColor {
    }
 }
 
+@MainActor
 // generate a hoop-shaped ModelEntity
-func getHoopEntity() -> ModelEntity {
+func getHoopEntity() async -> ModelEntity {
     var glassMaterial = PhysicallyBasedMaterial()
     glassMaterial.baseColor = PhysicallyBasedMaterial.BaseColor(tint:.white)
     glassMaterial.roughness = PhysicallyBasedMaterial.Roughness(floatLiteral: 0.2)
@@ -57,9 +58,12 @@ func getHoopEntity() -> ModelEntity {
     let hoop = ModelEntity()
     hoop.name = "hoop"
     
-    let rim = ModelEntity(
+    let shapeData = generateTorusShapeData(sides: 64, csSides: 64, radius: 0.23, csRadius: 0.012)
+    let rim = await ModelEntity(
         mesh: try! RealityGeometry.generateTorus(sides: 64, csSides: 64, radius: 0.23, csRadius: 0.012),
-        materials: [steelMaterial]
+        materials: [steelMaterial],
+        collisionShape: try! ShapeResource.generateStaticMesh(positions: shapeData.0, faceIndices: shapeData.1),
+        mass: 0
     )
     rim.orientation = simd_quatf(angle: .pi / 2, axis: [1,0,0])
     rim.scale.z = 2
@@ -106,7 +110,9 @@ func getHoopEntity() -> ModelEntity {
     // backboard: 1.83 x 1.22 x 0.02 with strips of width 0.05
     let backboard = ModelEntity(
         mesh: .generateBox(width: 1.83, height: 1.22, depth: 0.019),
-        materials: [glassMaterial]
+        materials: [glassMaterial],
+        collisionShapes: [ShapeResource.generateBox(width: 1.83, height: 1.22, depth: 0.019)],
+        mass: 0
     )
     backboard.name = "backboard"
 
@@ -231,5 +237,89 @@ func getHoopEntity() -> ModelEntity {
     
     hoop.addChild(backboard)
     
+    Task { @MainActor in
+        hoop.scale /= 1.5
+        hoop.components.set(InputTargetComponent())
+        hoop.components[PhysicsBodyComponent.self] = .init(
+            massProperties: .default,
+            material: .generate(
+                staticFriction: 0.5,
+                dynamicFriction: 0.5,
+                restitution: 0.05
+            ),
+            mode: .static
+        )
+        hoop.components[PhysicsMotionComponent.self] = .init()
+        hoop.position.z -= 2
+        hoop.position.y += 1.5
+    }
     return hoop
+}
+
+
+func addTorusVertices(
+    _ radius: Float, _ csRadius: Float, _ sides: Int, _ csSides: Int
+) -> [SIMD3<Float>] {
+    let angleIncs = 360 / Float(sides)
+    let csAngleIncs = 360 / Float(csSides)
+    var allVertices: [SIMD3<Float>] = []
+    var currentradius: Float
+    var jAngle: Float = 0
+    var iAngle: Float = 0
+    let dToR: Float = .pi / 180
+    var zval: Float
+    while jAngle <= 360 {
+        currentradius = radius + (csRadius * cosf(jAngle * dToR))
+        zval = csRadius * sinf(jAngle * dToR)
+        iAngle = 0
+        while iAngle <= 360 {
+            let vertexPos: SIMD3<Float> = [
+                currentradius * cosf(iAngle * dToR),
+                currentradius * sinf(iAngle * dToR),
+                zval
+            ]
+            var uv: SIMD2<Float> = [1 - iAngle / 360, 2 * jAngle / 360 - 1]
+            if uv.y < 0 { uv.y *= -1 }
+            allVertices.append(vertexPos)
+            iAngle += angleIncs
+        }
+        jAngle += csAngleIncs
+    }
+    return allVertices
+}
+
+func generateTorusShapeData(
+    sides: Int, csSides: Int, radius: Float, csRadius: Float
+) -> ([SIMD3<Float>], [UInt16]) {
+    let allVertices = addTorusVertices(radius, csRadius, sides, csSides)
+
+    var indices: [UInt16] = []
+    var i = 0
+    let rowCount = sides + 1
+    while i < csSides {
+        var j = 0
+        while j < sides {
+            /*
+             1
+             |\
+             | \
+             2--3
+             */
+            indices.append(UInt16(i * rowCount + j))
+            indices.append(UInt16(i * rowCount + j + 1))
+            indices.append(UInt16((i + 1) * rowCount + j + 1))
+            /*
+             3--2
+              \ |
+               \|
+                1
+             */
+            indices.append(UInt16((i + 1) * rowCount + j + 1))
+            indices.append(UInt16((i + 1) * rowCount + j))
+            indices.append(UInt16(i * rowCount + j))
+            j += 1
+        }
+        i += 1
+    }
+    return (allVertices, indices)
 }
