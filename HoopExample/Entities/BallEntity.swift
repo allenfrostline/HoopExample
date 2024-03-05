@@ -12,7 +12,7 @@ import RealityKit
 func getBallEntity() async -> ModelEntity {
     let ball = try! await ModelEntity(named: "ball")
     Task { @MainActor in
-        ball.scale *= 0.8
+        ball.scale *= 0.75
         ball.collision = try! await CollisionComponent(shapes: [ShapeResource.generateConvex(from: ball.model!.mesh)])
         ball.components.set(InputTargetComponent())
         ball.components[PhysicsBodyComponent.self] = .init(
@@ -25,7 +25,7 @@ func getBallEntity() async -> ModelEntity {
             mode: .dynamic
         )
         ball.components[PhysicsMotionComponent.self] = .init()
-        ball.position.z -= 1.8
+        ball.position.z -= 1.75
         ball.position.y += 2
     }
     return ball

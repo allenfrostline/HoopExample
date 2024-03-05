@@ -13,28 +13,19 @@ struct ImmersiveView: View {
     
     var body: some View {
         RealityView { content in
-
-            let floor = ModelEntity(
-                mesh: .generatePlane(width: 10, depth: 10),
-                materials: [OcclusionMaterial()]
-            )
-            floor.generateCollisionShapes(recursive: false)
-            floor.components[PhysicsBodyComponent.self] = .init(
-                massProperties: .default,
-                mode: .static
-            )
+            let floor = getFloorEntity()
             content.add(floor)
-
-            let ball = await getBallEntity()
-            content.add(ball)
             
             let hoop = await getHoopEntity()
             content.add(hoop)
-            
+
+            let ball = await getBallEntity()
+            content.add(ball)
+
             content.add(hand.rootEntity) // load hand tracking
         }
         .gesture(
-            DragGesture()
+            DragGesture(minimumDistance: 200)
             .targetedToAnyEntity()
             .onChanged{ value in
                 value.entity.position = value.convert(
@@ -51,6 +42,15 @@ struct ImmersiveView: View {
                     to: value.entity.parent!
                 )
                 value.entity.components[PhysicsBodyComponent.self]?.mode = .dynamic
+                if var physicsMotion = value.entity.components[PhysicsMotionComponent.self] {
+                    let translation = value.predictedEndTranslation3D / 1000
+                    physicsMotion.linearVelocity = SIMD3<Float>(
+                        Float(translation.x),
+                        Float(-translation.y),
+                        Float(translation.z)
+                    )
+                    value.entity.components[PhysicsMotionComponent.self] = physicsMotion
+                }
             }
         )
         .task {

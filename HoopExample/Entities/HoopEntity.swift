@@ -239,13 +239,12 @@ func getHoopEntity() async -> ModelEntity {
     
     Task { @MainActor in
         hoop.scale /= 1.5
-        hoop.components.set(InputTargetComponent())
         hoop.components[PhysicsBodyComponent.self] = .init(
             massProperties: .default,
             material: .generate(
                 staticFriction: 0.5,
                 dynamicFriction: 0.5,
-                restitution: 0.05
+                restitution: 0.2
             ),
             mode: .static
         )
